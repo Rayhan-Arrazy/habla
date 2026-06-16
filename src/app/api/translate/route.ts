@@ -23,6 +23,10 @@ export async function POST(req: Request) {
       systemPrompt = `Generate 3 multiple choice Spanish questions suitable for a CEFR level ${level} learner. Return a JSON array of objects, each with: "question" (in Spanish or English), "options" (array of 4 strings), "correctAnswer" (index 0-3 of correct option), "explanation" (in English, explaining why). Ensure variety and focus on grammar and vocabulary.`;
     } else if (type === 'explore') {
       systemPrompt = `Generate 6 random Spanish words or short phrases suitable for a CEFR level ${level} learner. They should be thematically grouped (e.g., travel, food, feelings). Return a JSON array of objects, each with: "spanish", "english", "exampleSentenceEs", "exampleSentenceEn".`;
+    } else if (type === 'reading') {
+      systemPrompt = `Write a short, engaging Spanish story (about 150-300 words) suitable for a CEFR level ${level} learner. Include a title. After the story, generate 3 multiple-choice comprehension questions in English or Spanish depending on level. Return a JSON object with keys: "title", "story", "questions". The "questions" should be an array of objects, each with: "question", "options" (array of 4 strings), "correctAnswer" (index 0-3), and "explanation" (in English).`;
+    } else if (type === 'listening') {
+      systemPrompt = `Generate a single, natural Spanish sentence suitable for a CEFR level ${level} learner to practice listening dictation. Return a JSON object with: "spanish" (the sentence), "english" (the translation), and "tips" (a string explaining tricky pronunciation rules in this sentence).`;
     }
 
     const response = await ai.models.generateContent({
