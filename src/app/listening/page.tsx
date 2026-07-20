@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { ArrowLeft, Headphones, Loader2, Play, RefreshCw, CheckCircle2, XCircle, Volume2 } from "lucide-react";
+import { ArrowLeft, Headphones, Loader2, Play, RefreshCw, CheckCircle2, XCircle, Volume2, Sparkles } from "lucide-react";
 
 export default function ListeningPage() {
   const [data, setData] = useState<any>(null);
