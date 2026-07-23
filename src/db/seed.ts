@@ -3,6 +3,7 @@ import postgres from 'postgres';
 import * as schema from './schema';
 import * as dotenv from 'dotenv';
 import { eq } from 'drizzle-orm';
+import bcrypt from 'bcryptjs';
 
 dotenv.config({ path: '.env.local' });
 
@@ -14,10 +15,12 @@ async function seed() {
 
   // 1. Seed Users
   console.log('Seeding users...');
+  const defaultPasswordHash = bcrypt.hashSync('password123', 10);
+
   const newUsers = [
     {
       username: 'rayhan_admin',
-      password: '$2a$10$0zX7TjF7z9.gZzGzFzGzF.zGzFzGzFzGzFzGzFzGzFzGzFzGzFzG', // bcrypt mock (we can test logging in later or register anew)
+      password: defaultPasswordHash,
       name: 'Rayhan',
       role: 'administrador',
       xp: 4500,
@@ -27,7 +30,7 @@ async function seed() {
     },
     {
       username: 'vany_learner',
-      password: '$2a$10$0zX7TjF7z9.gZzGzFzGzF.zGzFzGzFzGzFzGzFzGzFzGzFzGzFzG',
+      password: defaultPasswordHash,
       name: 'Vany',
       role: 'aprendiz',
       xp: 1200,
