@@ -24,7 +24,7 @@ export async function login(username: string, pass: string) {
   return { success: true };
 }
 
-export async function register(username: string, pass: string, name: string, role: string) {
+export async function register(username: string, pass: string, name: string, role: string = "estudiante") {
   const existing = await db.select().from(users).where(eq(users.username, username));
   if (existing.length > 0) return { error: "Username already taken" };
 
@@ -33,7 +33,7 @@ export async function register(username: string, pass: string, name: string, rol
     username,
     password: hashedPassword,
     name,
-    role
+    role: role || "estudiante"
   });
 
   return login(username, pass);

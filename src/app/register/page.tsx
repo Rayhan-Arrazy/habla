@@ -12,7 +12,7 @@ export default function RegisterPage() {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await register(username, password, name, role);
+    const res = await register(username, password, name, "estudiante");
     if (res.error) {
       setError(res.error);
     } else {
@@ -55,17 +55,6 @@ export default function RegisterPage() {
               className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:border-es-red-500 focus:ring-1 focus:ring-es-red-500"
               required 
             />
-          </div>
-          <div>
-            <label className="block text-slate-700 font-medium mb-1">Role</label>
-            <select 
-              value={role} 
-              onChange={e => setRole(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:border-es-red-500 focus:ring-1 focus:ring-es-red-500"
-            >
-              <option value="estudiante">Student (estudiante)</option>
-              <option value="administrador">Admin (administrador)</option>
-            </select>
           </div>
           <button type="submit" className="w-full bg-es-red-600 text-white font-bold py-3 rounded-xl hover:bg-es-red-700 transition-colors">
             Register
