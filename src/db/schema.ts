@@ -2,7 +2,8 @@ import { pgTable, serial, text, integer, timestamp, boolean, doublePrecision } f
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
-  clerkId: text("clerk_id").notNull().unique(),
+  username: text("username").notNull().unique(),
+  password: text("password").notNull(),
   name: text("name").notNull(),
   role: text("role").default("estudiante"), // "administrador" or "estudiante"
   currentStreak: integer("current_streak").default(0),

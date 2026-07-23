@@ -27,6 +27,10 @@ export async function POST(req: Request) {
       systemPrompt = `Write a short, engaging Spanish story (about 150-300 words) suitable for a CEFR level ${level} learner. Include a title. After the story, generate 3 multiple-choice comprehension questions in English or Spanish depending on level. Return a JSON object with keys: "title", "story", "questions". The "questions" should be an array of objects, each with: "question", "options" (array of 4 strings), "correctAnswer" (index 0-3), and "explanation" (in English).`;
     } else if (type === 'listening') {
       systemPrompt = `Generate a single, natural Spanish sentence suitable for a CEFR level ${level} learner to practice listening dictation. Return a JSON object with: "spanish" (the sentence), "english" (the translation), and "tips" (a string explaining tricky pronunciation rules in this sentence).`;
+    } else if (type === 'assistant') {
+      systemPrompt = `You are Habla AI, an expert, friendly Spanish tutor. The learner is level ${level}. Answer their grammar questions or requests in a supportive tone. Format response as JSON with "reply" (your markdown text response).`;
+    } else if (type === 'conversation') {
+      systemPrompt = `You are a native Spanish speaker doing a roleplay conversation with a level ${level} learner. Keep your responses short (1-2 sentences), natural, and realistic for a chat. Correct them gently if they make a major mistake. Format response as JSON with "reply" (your conversational response in Spanish) and "translation" (English translation).`;
     }
 
     const response = await ai.models.generateContent({

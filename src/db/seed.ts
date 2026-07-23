@@ -16,7 +16,8 @@ async function seed() {
   console.log('Seeding users...');
   const newUsers = [
     {
-      clerkId: 'user_rayhan_admin',
+      username: 'rayhan_admin',
+      password: '$2a$10$0zX7TjF7z9.gZzGzFzGzF.zGzFzGzFzGzFzGzFzGzFzGzFzGzFzG', // bcrypt mock (we can test logging in later or register anew)
       name: 'Rayhan',
       role: 'administrador',
       xp: 4500,
@@ -25,7 +26,8 @@ async function seed() {
       lastStudyDate: new Date(),
     },
     {
-      clerkId: 'user_vany_learner',
+      username: 'vany_learner',
+      password: '$2a$10$0zX7TjF7z9.gZzGzFzGzF.zGzFzGzFzGzFzGzFzGzFzGzFzGzFzG',
       name: 'Vany',
       role: 'aprendiz',
       xp: 1200,
@@ -37,7 +39,7 @@ async function seed() {
 
   for (const user of newUsers) {
     // Upsert logic for users
-    const existing = await db.select().from(schema.users).where(eq(schema.users.clerkId, user.clerkId));
+    const existing = await db.select().from(schema.users).where(eq(schema.users.username, user.username));
     if (existing.length === 0) {
       await db.insert(schema.users).values(user);
     }
