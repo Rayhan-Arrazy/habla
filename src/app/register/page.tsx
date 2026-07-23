@@ -12,7 +12,7 @@ export default function RegisterPage() {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await register(username, password, name, "estudiante");
+    const res = await register(username, password, name, role);
     if (res.error) {
       setError(res.error);
     } else {
