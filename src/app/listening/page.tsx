@@ -59,20 +59,20 @@ export default function ListeningPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors flex flex-col relative overflow-hidden">
       {/* Background Decorators */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-es-yellow-200/40 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-es-red-200/40 rounded-full blur-[120px] pointer-events-none" />
 
       <header className="p-4 flex items-center justify-between max-w-5xl mx-auto w-full relative z-10">
-        <Link href="/" className="flex items-center text-slate-500 hover:text-slate-800 transition-colors font-medium">
+        <Link href="/" className="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100 transition-colors font-medium">
           <ArrowLeft className="w-5 h-5 mr-1" /> Back
         </Link>
         <div className="flex items-center gap-2 text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-es-red-600 to-es-yellow-600">
           <Headphones className="w-6 h-6 text-es-red-500" />
           Listening Test
         </div>
-        <button onClick={fetchAudio} disabled={loading} className="p-2 rounded-full hover:bg-slate-200 text-slate-500 transition-colors disabled:opacity-50">
+        <button onClick={fetchAudio} disabled={loading} className="p-2 rounded-full hover:bg-slate-200 dark:bg-slate-800 transition-colors text-slate-500 dark:text-slate-400 transition-colors disabled:opacity-50">
           <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
         </button>
       </header>
@@ -83,8 +83,8 @@ export default function ListeningPage() {
             <div className="w-32 h-32 bg-gradient-to-br from-es-red-100 to-es-yellow-100 rounded-full flex items-center justify-center mb-8 shadow-inner border border-white">
               <Headphones className="w-16 h-16 text-es-red-500" />
             </div>
-            <h2 className="text-3xl font-black text-slate-800 mb-4 tracking-tight">Audio Dictation</h2>
-            <p className="text-lg text-slate-500 mb-10 font-medium">Listen to the AI native speaker and type exactly what you hear to test your ear training.</p>
+            <h2 className="text-3xl font-black text-slate-800 dark:text-slate-100 mb-4 tracking-tight">Audio Dictation</h2>
+            <p className="text-lg text-slate-500 dark:text-slate-400 mb-10 font-medium">Listen to the AI native speaker and type exactly what you hear to test your ear training.</p>
             <button onClick={fetchAudio} className="bg-gradient-to-r from-es-red-600 to-es-yellow-500 text-white px-10 py-5 rounded-full font-bold text-xl hover:scale-105 hover:shadow-xl transition-all w-full md:w-auto">
               Start Test
             </button>
@@ -92,13 +92,13 @@ export default function ListeningPage() {
         ) : loading ? (
           <div className="flex flex-col items-center animate-pulse">
             <Loader2 className="w-16 h-16 mb-6 animate-spin text-es-yellow-500" />
-            <p className="text-xl font-bold text-slate-500">Generating audio...</p>
+            <p className="text-xl font-bold text-slate-500 dark:text-slate-400">Generating audio...</p>
           </div>
         ) : data && (
           <div className="w-full max-w-2xl animate-in fade-in slide-in-from-bottom-8 duration-700">
             
             {/* Audio Player Card */}
-            <div className="bg-white p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 flex flex-col items-center mb-8 relative overflow-hidden">
+            <div className="bg-white dark:bg-slate-900 transition-colors p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 dark:border-slate-800 flex flex-col items-center mb-8 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-es-red-500 to-es-yellow-400" />
               
               <button 
@@ -112,10 +112,10 @@ export default function ListeningPage() {
               </button>
               
               <div className="mt-8 flex gap-4">
-                <button onClick={() => playAudio(0.6)} className="px-6 py-2 rounded-full border-2 border-slate-200 text-slate-600 font-bold hover:bg-slate-50 transition-colors text-sm flex items-center gap-2">
+                <button onClick={() => playAudio(0.6)} className="px-6 py-2 rounded-full border-2 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-bold hover:bg-slate-50 dark:bg-slate-950 transition-colors text-sm flex items-center gap-2">
                   <Play className="w-4 h-4" /> Slower (0.6x)
                 </button>
-                <button onClick={() => playAudio(0.9)} className="px-6 py-2 rounded-full border-2 border-slate-200 text-slate-600 font-bold hover:bg-slate-50 transition-colors text-sm flex items-center gap-2">
+                <button onClick={() => playAudio(0.9)} className="px-6 py-2 rounded-full border-2 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-bold hover:bg-slate-50 dark:bg-slate-950 transition-colors text-sm flex items-center gap-2">
                   <Play className="w-4 h-4" /> Normal
                 </button>
               </div>
@@ -133,7 +133,7 @@ export default function ListeningPage() {
                     ? isCorrect 
                       ? "border-green-400 bg-green-50 text-green-900" 
                       : "border-red-400 bg-red-50 text-red-900"
-                    : "border-slate-200 focus:border-es-yellow-400 bg-white"
+                    : "border-slate-200 dark:border-slate-800 focus:border-es-yellow-400 bg-white dark:bg-slate-900 transition-colors"
                 }`}
               />
               {submitted && (
@@ -157,15 +157,15 @@ export default function ListeningPage() {
                   <h3 className={`text-sm font-black uppercase mb-2 ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
                     {isCorrect ? "Perfectly Correct!" : "Correct Answer"}
                   </h3>
-                  <p className="text-xl font-bold text-slate-800 mb-1">{data.spanish}</p>
-                  <p className="text-slate-500 font-medium">{data.english}</p>
+                  <p className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-1">{data.spanish}</p>
+                  <p className="text-slate-500 dark:text-slate-400 font-medium">{data.english}</p>
                 </div>
                 
                 <div className="p-6 rounded-3xl bg-es-yellow-50 border border-es-yellow-200">
                   <h3 className="text-sm font-black uppercase text-es-yellow-600 mb-2 flex items-center gap-2">
                     <Sparkles className="w-4 h-4" /> Pronunciation Tip
                   </h3>
-                  <p className="text-slate-700 font-medium leading-relaxed">{data.tips}</p>
+                  <p className="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">{data.tips}</p>
                 </div>
 
                 <button 

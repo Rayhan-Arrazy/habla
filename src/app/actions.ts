@@ -70,8 +70,17 @@ export async function getDueFlashcards() {
 }
 
 export async function getDictionaryWords() {
-  const allWords = await db.select().from(words).limit(50);
+  const allWords = await db.select().from(words).orderBy(words.spanish);
   return allWords;
+}
+
+export async function addDictionaryWord(data: { spanish: string, english: string, exampleSentenceEs: string, exampleSentenceEn: string, synonyms?: string }) {
+  const existing = await db.select().from(words).where(eq(words.spanish, data.spanish));
+  if (existing.length === 0) {
+    const inserted = await db.insert(words).values(data).returning();
+    return inserted[0];
+  }
+  return existing[0];
 }
 
 export async function updateFlashcardProgress(wordId: number, ease: number) {

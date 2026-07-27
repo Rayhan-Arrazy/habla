@@ -26,9 +26,9 @@ export default function SpeakingPage() {
   const targetWord = words.length > 0 ? words[currentIndex].spanish : "Cargando...";
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
-      <header className="p-4 flex items-center max-w-5xl mx-auto w-full border-b border-slate-200">
-        <Link href="/" className="flex items-center text-slate-500 hover:text-slate-800 transition-colors mr-auto">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors flex flex-col">
+      <header className="p-4 flex items-center max-w-5xl mx-auto w-full border-b border-slate-200 dark:border-slate-800">
+        <Link href="/" className="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100 transition-colors mr-auto">
           <ArrowLeft className="w-5 h-5 mr-1" /> Back to Hub
         </Link>
         <div className="flex items-center gap-2 text-xl font-bold text-es-red-600">
@@ -40,8 +40,8 @@ export default function SpeakingPage() {
       <main className="flex-1 flex flex-col items-center justify-center p-4">
         <div className="w-full max-w-lg relative z-10">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-black text-slate-800 mb-2">Pronunciation test</h1>
-            <p className="text-slate-500 font-medium">Read the word out loud to test your accent.</p>
+            <h1 className="text-3xl font-black text-slate-800 dark:text-slate-100 mb-2">Pronunciation test</h1>
+            <p className="text-slate-500 dark:text-slate-400 font-medium">Read the word out loud to test your accent.</p>
           </div>
           
           <PronunciationChecker targetWord={targetWord} />
@@ -49,7 +49,7 @@ export default function SpeakingPage() {
           <div className="mt-8 flex justify-center">
             <button 
               onClick={handleNext}
-              className="bg-white border border-slate-200 text-slate-700 px-6 py-3 rounded-xl font-bold hover:bg-slate-50 transition-colors shadow-sm flex items-center gap-2"
+              className="bg-white dark:bg-slate-900 transition-colors border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl font-bold hover:bg-slate-50 dark:bg-slate-950 transition-colors shadow-sm flex items-center gap-2"
             >
               <Shuffle className="w-5 h-5" /> Next Word
             </button>

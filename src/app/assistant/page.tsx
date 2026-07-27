@@ -39,11 +39,11 @@ export default function AssistantPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors flex flex-col relative overflow-hidden">
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-es-red-200/40 rounded-full blur-[120px] pointer-events-none" />
 
-      <header className="p-4 flex items-center max-w-5xl mx-auto w-full relative z-10 border-b border-slate-200 bg-white/50 backdrop-blur-md">
-        <Link href="/" className="flex items-center text-slate-500 hover:text-slate-800 transition-colors mr-auto font-medium">
+      <header className="p-4 flex items-center max-w-5xl mx-auto w-full relative z-10 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors/50 backdrop-blur-md">
+        <Link href="/" className="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100 transition-colors mr-auto font-medium">
           <ArrowLeft className="w-5 h-5 mr-1" /> Back
         </Link>
         <div className="flex items-center gap-2 text-xl font-black text-es-red-600">
@@ -53,14 +53,14 @@ export default function AssistantPage() {
       </header>
 
       <main className="flex-1 w-full max-w-3xl mx-auto p-4 flex flex-col relative z-10 h-[calc(100vh-80px)]">
-        <div className="flex-1 bg-white rounded-3xl shadow-sm border border-slate-200 flex flex-col overflow-hidden mb-4">
+        <div className="flex-1 bg-white dark:bg-slate-900 transition-colors rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col overflow-hidden mb-4">
           <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`max-w-[80%] rounded-2xl p-4 shadow-sm ${
                   msg.role === 'user' 
                     ? 'bg-slate-800 text-white rounded-tr-none' 
-                    : 'bg-slate-100 text-slate-800 rounded-tl-none border border-slate-200'
+                    : 'bg-slate-100 dark:bg-slate-800 transition-colors text-slate-800 dark:text-slate-100 rounded-tl-none border border-slate-200 dark:border-slate-800'
                 }`}>
                   <p className="whitespace-pre-wrap leading-relaxed">{msg.content}</p>
                 </div>
@@ -68,22 +68,22 @@ export default function AssistantPage() {
             ))}
             {loading && (
               <div className="flex justify-start">
-                <div className="bg-slate-100 rounded-2xl p-4 rounded-tl-none border border-slate-200 flex items-center gap-2">
+                <div className="bg-slate-100 dark:bg-slate-800 transition-colors rounded-2xl p-4 rounded-tl-none border border-slate-200 dark:border-slate-800 flex items-center gap-2">
                   <Loader2 className="w-5 h-5 animate-spin text-es-red-500" />
-                  <span className="text-slate-500 font-medium">Thinking...</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-medium">Thinking...</span>
                 </div>
               </div>
             )}
             <div ref={endRef} />
           </div>
-          <div className="p-4 bg-slate-50 border-t border-slate-200 flex gap-2">
+          <div className="p-4 bg-slate-50 dark:bg-slate-950 transition-colors border-t border-slate-200 dark:border-slate-800 flex gap-2">
             <input 
               type="text" 
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
               placeholder="Ask a grammar question..."
-              className="flex-1 bg-white border border-slate-300 rounded-full px-6 py-4 focus:outline-none focus:border-es-red-500 focus:ring-1 focus:ring-es-red-500 shadow-inner"
+              className="flex-1 bg-white dark:bg-slate-900 transition-colors border border-slate-300 dark:border-slate-700 rounded-full px-6 py-4 focus:outline-none focus:border-es-red-500 focus:ring-1 focus:ring-es-red-500 shadow-inner"
             />
             <button 
               onClick={sendMessage}

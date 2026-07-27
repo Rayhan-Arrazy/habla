@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "AI-powered Spanish language learning app",
 };
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,8 +25,15 @@ export default function RootLayout({
       className={`${inter.variable} font-sans`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col antialiased text-slate-900 bg-slate-50">
-        {children}
+      <body className="min-h-screen flex flex-col antialiased text-slate-900 bg-slate-50 dark:bg-slate-950 dark:text-slate-50 transition-colors">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

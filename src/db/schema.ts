@@ -19,6 +19,7 @@ export const words = pgTable("words", {
   english: text("english").notNull(),
   exampleSentenceEs: text("example_sentence_es"),
   exampleSentenceEn: text("example_sentence_en"),
+  synonyms: text("synonyms"), // Added for dictionary improvements
   createdAt: timestamp("created_at").defaultNow(),
 });
 

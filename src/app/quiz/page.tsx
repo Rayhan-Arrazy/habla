@@ -77,16 +77,16 @@ export default function QuizPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center flex-col">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors flex items-center justify-center flex-col">
         <Loader2 className="w-12 h-12 mb-4 animate-spin text-es-red-500" />
-        <p className="text-slate-500">Generating your quiz with AI...</p>
+        <p className="text-slate-500 dark:text-slate-400">Generating your quiz with AI...</p>
       </div>
     );
   }
 
   if (questions.length === 0 && !loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 text-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors flex flex-col items-center justify-center p-4 text-center">
         <p className="text-es-red-500 font-bold mb-4">{errorMsg || "Failed to load quiz. Please try again."}</p>
         {errorMsg && (
           <Link href="/">
@@ -101,10 +101,10 @@ export default function QuizPage() {
 
   if (isFinished) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 text-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors flex flex-col items-center justify-center p-4 text-center">
         <Trophy className="w-24 h-24 text-amber-500 mb-6" />
         <h1 className="text-4xl font-bold mb-4">Quiz Complete!</h1>
-        <p className="text-xl text-slate-600 mb-8">
+        <p className="text-xl text-slate-600 dark:text-slate-400 mb-8">
           You scored <span className="font-bold text-es-red-600">{score}</span> out of {questions.length}.
         </p>
         <Link href="/">
@@ -119,9 +119,9 @@ export default function QuizPage() {
   const currentQ = questions[currentIdx];
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors flex flex-col">
       <header className="p-4 flex items-center justify-between max-w-2xl mx-auto w-full">
-        <Link href="/" className="flex items-center text-slate-500 hover:text-slate-800 transition-colors">
+        <Link href="/" className="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100 transition-colors">
           <ArrowLeft className="w-5 h-5 mr-1" /> Quit
         </Link>
         <div className="flex gap-2">
@@ -129,7 +129,7 @@ export default function QuizPage() {
             <div 
               key={i} 
               className={`h-2 w-8 rounded-full ${
-                i < currentIdx ? 'bg-es-red-600' : i === currentIdx ? 'bg-es-red-300' : 'bg-slate-200'
+                i < currentIdx ? 'bg-es-red-600' : i === currentIdx ? 'bg-es-red-300' : 'bg-slate-200 dark:bg-slate-800 transition-colors'
               }`}
             />
           ))}
@@ -139,13 +139,13 @@ export default function QuizPage() {
 
       <main className="flex-1 flex flex-col items-center justify-center p-4">
         <div className="max-w-2xl w-full">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-slate-800">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-slate-800 dark:text-slate-100">
             {currentQ.question}
           </h2>
 
           <div className="grid grid-cols-1 gap-4 mb-8">
             {currentQ.options.map((option, idx) => {
-              let btnClass = "bg-white border-2 border-slate-200 hover:border-es-red-300 text-slate-700";
+              let btnClass = "bg-white dark:bg-slate-900 transition-colors border-2 border-slate-200 dark:border-slate-800 hover:border-es-red-300 text-slate-700 dark:text-slate-300";
               let icon = null;
 
               if (isAnswered) {
@@ -156,7 +156,7 @@ export default function QuizPage() {
                   btnClass = "bg-red-50 border-red-500 text-red-700";
                   icon = <XCircle className="w-6 h-6 text-red-500" />;
                 } else {
-                  btnClass = "bg-slate-50 border-slate-200 text-slate-400 opacity-50";
+                  btnClass = "bg-slate-50 dark:bg-slate-950 transition-colors border-slate-200 dark:border-slate-800 text-slate-400 opacity-50";
                 }
               }
 

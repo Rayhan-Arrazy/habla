@@ -44,16 +44,16 @@ export default function ReadingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
-      <header className="p-4 flex items-center justify-between max-w-5xl mx-auto w-full border-b border-slate-200">
-        <Link href="/" className="flex items-center text-slate-500 hover:text-slate-800 transition-colors">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors flex flex-col">
+      <header className="p-4 flex items-center justify-between max-w-5xl mx-auto w-full border-b border-slate-200 dark:border-slate-800">
+        <Link href="/" className="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100 transition-colors">
           <ArrowLeft className="w-5 h-5 mr-1" /> Back to Hub
         </Link>
         <div className="flex items-center gap-2 text-xl font-bold text-es-red-600">
           <BookOpen className="w-6 h-6" />
           Reading Comprehension
         </div>
-        <button onClick={fetchReading} disabled={loading} className="p-2 rounded-full hover:bg-slate-200 text-slate-500 transition-colors disabled:opacity-50">
+        <button onClick={fetchReading} disabled={loading} className="p-2 rounded-full hover:bg-slate-200 dark:bg-slate-800 transition-colors text-slate-500 dark:text-slate-400 transition-colors disabled:opacity-50">
           <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
         </button>
       </header>
@@ -62,8 +62,8 @@ export default function ReadingPage() {
         {!readingData && !loading ? (
           <div className="flex flex-col items-center justify-center flex-1 mt-20">
             <BookOpen className="w-16 h-16 text-slate-300 mb-6" />
-            <h2 className="text-2xl font-bold text-slate-700 mb-4">Generate a Reading Test</h2>
-            <p className="text-slate-500 mb-8 max-w-md text-center">Practice your reading comprehension with a short story tailored to your Spanish level, followed by questions.</p>
+            <h2 className="text-2xl font-bold text-slate-700 dark:text-slate-300 mb-4">Generate a Reading Test</h2>
+            <p className="text-slate-500 dark:text-slate-400 mb-8 max-w-md text-center">Practice your reading comprehension with a short story tailored to your Spanish level, followed by questions.</p>
             <button onClick={fetchReading} className="bg-es-red-600 text-white px-8 py-3 rounded-full font-bold hover:bg-es-red-700 shadow-lg">
               Generate Story
             </button>
@@ -71,24 +71,24 @@ export default function ReadingPage() {
         ) : loading ? (
           <div className="flex flex-col items-center justify-center flex-1 mt-20">
             <Loader2 className="w-12 h-12 mb-4 animate-spin text-es-red-500" />
-            <p className="text-slate-500">Writing a unique story...</p>
+            <p className="text-slate-500 dark:text-slate-400">Writing a unique story...</p>
           </div>
         ) : readingData && (
           <div className="w-full max-w-3xl mt-8 pb-20 animate-in fade-in duration-500">
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 mb-8">
-              <h1 className="text-3xl font-extrabold text-slate-900 mb-6">{readingData.title}</h1>
+            <div className="bg-white dark:bg-slate-900 transition-colors p-8 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 mb-8">
+              <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-6">{readingData.title}</h1>
               <div className="prose prose-lg prose-slate max-w-none">
                 {readingData.story.split('\n').map((paragraph: string, idx: number) => (
-                  <p key={idx} className="mb-4 text-slate-700 leading-relaxed">{paragraph}</p>
+                  <p key={idx} className="mb-4 text-slate-700 dark:text-slate-300 leading-relaxed">{paragraph}</p>
                 ))}
               </div>
             </div>
 
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-slate-800 mb-4">Comprehension Questions</h2>
+              <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-4">Comprehension Questions</h2>
               {readingData.questions.map((q: any, qIdx: number) => (
-                <div key={qIdx} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                  <h3 className="text-lg font-bold text-slate-800 mb-4">{qIdx + 1}. {q.question}</h3>
+                <div key={qIdx} className="bg-white dark:bg-slate-900 transition-colors p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800">
+                  <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4">{qIdx + 1}. {q.question}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {q.options.map((opt: string, oIdx: number) => {
                       const isSelected = selectedAnswers[qIdx] === oIdx;
@@ -96,11 +96,11 @@ export default function ReadingPage() {
                       
                       let btnClass = "border-2 text-left px-4 py-3 rounded-xl font-medium transition-all ";
                       if (!submitted) {
-                        btnClass += isSelected ? "border-es-red-500 bg-es-red-50 text-es-red-700" : "border-slate-200 hover:border-slate-300 text-slate-600";
+                        btnClass += isSelected ? "border-es-red-500 bg-es-red-50 text-es-red-700" : "border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400";
                       } else {
                         if (isCorrect) btnClass += "border-green-500 bg-green-50 text-green-700";
                         else if (isSelected && !isCorrect) btnClass += "border-red-500 bg-red-50 text-red-700 opacity-50";
-                        else btnClass += "border-slate-200 text-slate-400 opacity-50";
+                        else btnClass += "border-slate-200 dark:border-slate-800 text-slate-400 opacity-50";
                       }
 
                       return (
@@ -111,7 +111,7 @@ export default function ReadingPage() {
                     })}
                   </div>
                   {submitted && (
-                    <div className="mt-4 p-4 bg-slate-50 rounded-xl text-sm text-slate-600 border border-slate-100 flex gap-2">
+                    <div className="mt-4 p-4 bg-slate-50 dark:bg-slate-950 transition-colors rounded-xl text-sm text-slate-600 dark:text-slate-400 border border-slate-100 dark:border-slate-800 flex gap-2">
                       <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
                       {q.explanation}
                     </div>

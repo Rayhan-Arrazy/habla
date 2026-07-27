@@ -57,9 +57,9 @@ export default function WordOfDayPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors flex flex-col">
       <header className="p-4 flex items-center justify-between max-w-3xl mx-auto w-full">
-        <Link href="/" className="flex items-center text-slate-500 hover:text-slate-800 transition-colors">
+        <Link href="/" className="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100 transition-colors">
           <ArrowLeft className="w-5 h-5 mr-1" /> Back
         </Link>
         <div className="flex items-center gap-2 text-xl font-bold text-es-red-600">
@@ -71,13 +71,13 @@ export default function WordOfDayPage() {
 
       <main className="flex-1 flex flex-col items-center justify-center p-4">
         {loading ? (
-          <div className="flex flex-col items-center text-slate-500 animate-pulse">
+          <div className="flex flex-col items-center text-slate-500 dark:text-slate-400 animate-pulse">
             <Loader2 className="w-12 h-12 mb-4 animate-spin text-es-red-500" />
             <p>Generating today's word...</p>
           </div>
         ) : wordData ? (
           <div className="max-w-xl w-full animate-in fade-in zoom-in duration-500">
-            <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 relative">
+            <div className="bg-white dark:bg-slate-900 transition-colors rounded-3xl shadow-xl overflow-hidden border border-slate-100 dark:border-slate-800 relative">
               {/* Decorative background shape */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-es-red-500 rounded-bl-full opacity-10 blur-2xl pointer-events-none"></div>
               
@@ -86,19 +86,19 @@ export default function WordOfDayPage() {
                   <Sparkles className="w-4 h-4" /> AI Generated
                 </div>
                 
-                <h1 className="text-5xl font-extrabold text-slate-900 mb-2 capitalize tracking-tight">
+                <h1 className="text-5xl font-extrabold text-slate-900 dark:text-white mb-2 capitalize tracking-tight">
                   {wordData.spanish}
                 </h1>
-                <h2 className="text-2xl text-slate-500 font-medium mb-8">
+                <h2 className="text-2xl text-slate-500 dark:text-slate-400 font-medium mb-8">
                   {wordData.english}
                 </h2>
                 
-                <div className="bg-slate-50 p-6 rounded-2xl text-left border border-slate-100">
+                <div className="bg-slate-50 dark:bg-slate-950 transition-colors p-6 rounded-2xl text-left border border-slate-100 dark:border-slate-800">
                   <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Example Sentence</h3>
-                  <p className="text-lg font-medium text-slate-800 mb-2">
+                  <p className="text-lg font-medium text-slate-800 dark:text-slate-100 mb-2">
                     {wordData.exampleSentenceEs}
                   </p>
-                  <p className="text-slate-500 italic">
+                  <p className="text-slate-500 dark:text-slate-400 italic">
                     {wordData.exampleSentenceEn}
                   </p>
                 </div>

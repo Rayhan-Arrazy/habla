@@ -18,11 +18,13 @@ export async function POST(req: Request) {
     if (type === 'translate') {
       systemPrompt = `You are a helpful Spanish teacher. Translate the given text to Spanish if it is in English, or to English if it is in Spanish. The learner is at CEFR level ${level}. Provide the translation, and a brief grammar tip or explanation if applicable. Format as JSON with "translation" and "explanation" keys.`;
     } else if (type === 'word_of_day') {
-      systemPrompt = `Generate a random, useful Spanish word suitable for a CEFR level ${level} learner. Make sure it's a NEW word, rarely generated before. Return a JSON object with keys: "spanish", "english", "exampleSentenceEs", "exampleSentenceEn".`;
+      systemPrompt = `Generate a random, useful Spanish word suitable for a CEFR level ${level} learner. Make sure it's a NEW word. Random seed: ${Math.random()}. Return exactly one JSON object with keys: "spanish", "english", "exampleSentenceEs", "exampleSentenceEn". Do NOT wrap it in a markdown block.`;
     } else if (type === 'quiz') {
       systemPrompt = `Generate 3 multiple choice Spanish questions suitable for a CEFR level ${level} learner. Return a JSON array of objects, each with: "question" (in Spanish or English), "options" (array of 4 strings), "correctAnswer" (index 0-3 of correct option), "explanation" (in English, explaining why). Ensure variety and focus on grammar and vocabulary.`;
     } else if (type === 'explore') {
-      systemPrompt = `Generate 6 random Spanish words or short phrases suitable for a CEFR level ${level} learner. They should be thematically grouped (e.g., travel, food, feelings). Return a JSON array of objects, each with: "spanish", "english", "exampleSentenceEs", "exampleSentenceEn".`;
+      systemPrompt = `Generate 6 random Spanish words or short phrases suitable for a CEFR level ${level} learner. They should be thematically grouped (e.g., travel, food, feelings). Return ONLY a JSON array of objects, each with: "spanish", "english", "exampleSentenceEs", "exampleSentenceEn". Ensure it is a valid JSON array format, e.g. [{...}, {...}].`;
+    } else if (type === 'dictionary') {
+      systemPrompt = `You are a dictionary. Define the word or phrase provided in the prompt. If it's English, translate it to Spanish. If it's Spanish, translate to English. Return ONLY a JSON object with: "spanish" (the Spanish word), "english" (the English meaning), "exampleSentenceEs" (a Spanish example sentence), "exampleSentenceEn" (English translation of the sentence), and "synonyms" (a string of 3-4 comma-separated synonyms in Spanish).`;
     } else if (type === 'reading') {
       systemPrompt = `Write a short, engaging Spanish story (about 150-300 words) suitable for a CEFR level ${level} learner. Include a title. After the story, generate 3 multiple-choice comprehension questions in English or Spanish depending on level. Return a JSON object with keys: "title", "story", "questions". The "questions" should be an array of objects, each with: "question", "options" (array of 4 strings), "correctAnswer" (index 0-3), and "explanation" (in English).`;
     } else if (type === 'listening') {
@@ -47,7 +49,9 @@ export async function POST(req: Request) {
 
     const result = response.text || '{}';
     
-    let parsed = JSON.parse(result);
+    // Clean up potential markdown formatting before parsing
+    const cleanedResult = result.replace(/^```json/m, '').replace(/^```/m, '').trim();
+    let parsed = JSON.parse(cleanedResult);
     
     // Unwrap if it's placed inside a root key like {"questions": [...]} or {"words": [...]}
     if (type === 'quiz' && !Array.isArray(parsed)) {

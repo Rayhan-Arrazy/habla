@@ -54,9 +54,9 @@ export default function ExplorePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors flex flex-col">
       <header className="p-4 flex items-center justify-between max-w-5xl mx-auto w-full">
-        <Link href="/" className="flex items-center text-slate-500 hover:text-slate-800 transition-colors">
+        <Link href="/" className="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100 transition-colors">
           <ArrowLeft className="w-5 h-5 mr-1" /> Back
         </Link>
         <div className="flex items-center gap-2 text-xl font-bold text-sky-600">
@@ -66,7 +66,7 @@ export default function ExplorePage() {
         <button 
           onClick={fetchWords} 
           disabled={loading}
-          className="p-2 rounded-full hover:bg-slate-200 text-slate-500 transition-colors disabled:opacity-50"
+          className="p-2 rounded-full hover:bg-slate-200 dark:bg-slate-800 transition-colors text-slate-500 dark:text-slate-400 transition-colors disabled:opacity-50"
         >
           <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
         </button>
@@ -76,7 +76,7 @@ export default function ExplorePage() {
         {loading && words.length === 0 ? (
           <div className="flex flex-col items-center justify-center flex-1">
             <Loader2 className="w-12 h-12 mb-4 animate-spin text-sky-500" />
-            <p className="text-slate-500">Generating new vocabulary...</p>
+            <p className="text-slate-500 dark:text-slate-400">Generating new vocabulary...</p>
           </div>
         ) : errorMsg ? (
           <div className="flex flex-col items-center justify-center flex-1 text-center">
@@ -90,15 +90,15 @@ export default function ExplorePage() {
         ) : (
           <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {words.map((word, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col hover:shadow-md transition-shadow">
+              <div key={idx} className="bg-white dark:bg-slate-900 transition-colors p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col hover:shadow-md transition-shadow">
                 <div className="mb-4">
-                  <h3 className="text-3xl font-extrabold text-slate-900 mb-1 capitalize">{word.spanish}</h3>
-                  <p className="text-lg text-slate-500 font-medium">{word.english}</p>
+                  <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-1 capitalize">{word.spanish}</h3>
+                  <p className="text-lg text-slate-500 dark:text-slate-400 font-medium">{word.english}</p>
                 </div>
                 
                 <div className="bg-sky-50 p-4 rounded-xl text-left border border-sky-100 mb-4 flex-1">
-                  <p className="font-medium text-slate-800 mb-1">{word.exampleSentenceEs}</p>
-                  <p className="text-sm text-slate-500 italic">{word.exampleSentenceEn}</p>
+                  <p className="font-medium text-slate-800 dark:text-slate-100 mb-1">{word.exampleSentenceEs}</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 italic">{word.exampleSentenceEn}</p>
                 </div>
 
                 <div className="-mx-2 -mb-2">
